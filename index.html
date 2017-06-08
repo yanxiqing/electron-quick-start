@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <style type="text/css">
+      body{
+        margin: 0;
+      }
+      textarea{
+        width: 99%;
+        margin: 10px 0;
+        padding: 0;
+        outline: none;
+      }
+    </style>
+  </head>
+    <h1>Hello World!</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+  <textarea id="text" rows="10"></textarea>
+  <!--<input type="file" id="file1" onchange="fileSelect1(this.files)">-->
+  <button id="write_btn" onclick="writeFile()">写文件</button>
+  <button id="read_btn" onclick="readFile()">读文件</button>
+  <script src="./myapi.js"></script>
+  </body>
+
+  <script>
+    const ipc = require('electron').ipcRenderer
+    const  contextMenuBtn = document.getElementById('context-menu');
+    contextMenuBtn.addEventListener('click',function () {
+        ipc.send('show-context-menu')
+
+    });
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>
